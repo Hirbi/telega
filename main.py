@@ -8,9 +8,30 @@ def time(update, context):
 
 
 def date(update, context):
-    ans = ' '.join(times.asctime().split()[:3]) + times.asctime().split()[-1]
+    ans = ' '.join(times.asctime().split()[:3]) + " " + times.asctime().split()[-1]
     update.message.reply_text(ans)
 
+
+def task(context):
+    job = context.job
+    context.bot.send_message(job.context, text='Вернулся')
+
+
+def set_timer(update, context):
+    chat_id = update.message.chat_id
+    try:
+        due = (context.args[0])
+        if due < 0:
+            update.message.reply_text('Прошлое не круто')
+            return
+        if 'job' in context.chat_data:
+            old_job = context.chat_data['job']
+            old_job.shedule_removal()
+        new_job = context.job_queue.run_once(task, due, context=chat_id)
+        context.chat_data['job'] = new_job
+        update.message.reply_text(f'Вернусь через {due} секунд')
+    except (IndexError, ValueError):
+        update.message.reply_text('Глупышка')
 
 def echo(update, context):
     text = update.message.text

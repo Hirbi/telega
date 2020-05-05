@@ -8,7 +8,7 @@ def time(update, context):
 
 
 def date(update, context):
-    ans = ' '.join(times.asctime().split()[3]) + times.asctime().split()[-1]
+    ans = ' '.join(times.asctime().split()[:3]) + times.asctime().split()[-1]
     update.message.reply_text(ans)
 
 

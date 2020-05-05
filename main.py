@@ -21,6 +21,8 @@ def main():
     updater = Updater('1121846344:AAH6Xmry_2HfNc9i6YjxvSoBnMJbJ0jKeLo',
                       use_context=True)
     dp = updater.dispatcher
+    dp.add_handler(CommandHandler("date", date))
+    dp.add_handler(CommandHandler("time", time))
     text_handler = MessageHandler(Filters.text, echo)
     dp.add_handler(text_handler)
     updater.start_polling()

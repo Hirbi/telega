@@ -3,7 +3,8 @@ from telegram.ext import CallbackContext, CommandHandler
 
 
 def echo(update, context):
-    update.message.reply_text(f'Я получил сообщение "{update.message.text}"')
+    text = update.message.text
+    update.message.reply_text(f'asd {text}')
 
 
 def main():

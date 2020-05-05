@@ -3,11 +3,6 @@ from telegram.ext import CallbackContext, CommandHandler
 import time as times
 
 
-def echo(update, context):
-    text = update.message.text
-    update.message.reply_text(f'Я получил сообщение "{text}"')
-
-
 def time(update, context):
     update.message.reply_text(times.asctime().split()[3])
 
@@ -15,6 +10,11 @@ def time(update, context):
 def date(update, context):
     ans = ' '.join(times.asctime().split()[3]) + times.asctime().split()[-1]
     update.message.reply_text(ans)
+
+
+def echo(update, context):
+    text = update.message.text
+    update.message.reply_text(f'Я получил сообщение "{text}"')
 
 
 def main():
